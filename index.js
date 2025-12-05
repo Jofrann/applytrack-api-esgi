@@ -2,6 +2,7 @@ import express from 'express';
 import usersRouter from './routes/users.routes.js';
 import { authenticationMiddleware } from './middlewares/authentication.js';
 import companiesRouter from './routes/companies.routes.js';
+import contactsRouter from './routes/contacts.routes.js';
 
 // Initialisation de l'application Express
 const app = express();
@@ -24,6 +25,8 @@ app.use('/companies', companiesRouter);
 app.post('/project', authenticationMiddleware, (req, res) => {
   res.send('Project created successfully!');
 });
+// Routes pour les contacts
+app.use('/companies', contactsRouter);
 
 // Démarrage du serveur
 app.listen(PORT, () => {
