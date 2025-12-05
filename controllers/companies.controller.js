@@ -10,6 +10,18 @@ export async function createCompany(req, res) {
 
   // Insertion dans la base de données
   try {
+
+    // Vérifie si la company existe déjà chez cet user en uilisant le token de l'user
+    const [rows] = await db.query(
+      `SELECT id FROM companies WHERE name = ? AND user_id = ?`,
+      [name, userId]
+    );
+
+    // Si la company existe déjà, renvoyer une erreur
+    if (rows.length > 0) {
+      return res.status(400).send('Company already exists for this user!');
+    }
+    
     await db.query(
       `INSERT INTO companies (name, address, city, postal_code, user_id) 
        VALUES (?, ?, ?, ?, ?)`,
