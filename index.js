@@ -1,7 +1,9 @@
 import express from 'express';
 import usersRouter from './routes/users.routes.js';
 import { authenticationMiddleware } from './middlewares/authentication.js';
+import companiesRouter from './routes/companies.routes.js';
 
+// Initialisation de l'application Express
 const app = express();
 const PORT = 3000;
 
@@ -17,10 +19,13 @@ app.get('/with-auth', authenticationMiddleware, (req, res) => {
   res.send('Ok');
 });
 
+// Routes pour les companies
+app.use('/companies', companiesRouter);
 app.post('/project', authenticationMiddleware, (req, res) => {
   res.send('Project created successfully!');
 });
 
+// Démarrage du serveur
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

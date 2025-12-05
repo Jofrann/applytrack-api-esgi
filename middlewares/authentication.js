@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 function authenticationMiddleware(req, res, next) {
-  const token = req.header('x-api-key');
+  const token = req.header('token');
   if (!token) {
     res.status(401).send('Unauthorized: No token provided')
     return;
