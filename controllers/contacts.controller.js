@@ -12,10 +12,11 @@ export async function createContact(req, res) {
   try {
     // Vérifier que la company appartient bien au user
     const [rows] = await db.query(
-      `SELECT * FROM companies WHERE id = ? AND user_id = ?`,
+      `SELECT id FROM companies WHERE id = ? AND user_id = ?`,
       [companyId, userId]
     );
 
+    // Ensuite, si aucune company n'est trouvée, renvoyer une erreur 404 Not Found
     if (rows.length === 0) {
       return res.status(404).send("Company not found or unauthorized");
     }
@@ -47,15 +48,18 @@ export async function getContacts(req, res) {
       [companyId, userId]
     );
 
+    // Si la company n'existe pas ou n'appartient pas à l'utilisateur connecté
     if (company.length === 0) {
       return res.status(404).send("Company not found or unauthorized");
     }
 
+    // Récupérer les contacts associés à la company
     const [contacts] = await db.query(
       `SELECT * FROM contacts WHERE company_id = ?`,
       [companyId]
     );
 
+    // Réponse au client avec la liste des contacts & 200 OK.
     return res.json(contacts);
   } catch (error) {
     console.error("Error getting contacts:", error);
