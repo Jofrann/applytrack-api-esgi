@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import usersRouter from './routes/users.routes.js';
 import { authenticationMiddleware } from './middlewares/authentication.js';
 import companiesRouter from './routes/companies.routes.js';
@@ -9,6 +10,8 @@ import interactionsRouter from './routes/interactions.routes.js';
 // Initialisation de l'application Express
 const app = express();
 const PORT = 3000;
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -33,6 +36,8 @@ app.use('/companies', contactsRouter);
 // Routes pour les interactions
 app.use('/companies', interactionsRouter);
 
+// CORS
+app.use(cors());
 
 // Démarrage du serveur
 app.listen(PORT, () => {
