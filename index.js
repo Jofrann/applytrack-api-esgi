@@ -4,6 +4,7 @@ import { authenticationMiddleware } from './middlewares/authentication.js';
 import companiesRouter from './routes/companies.routes.js';
 import contactsRouter from './routes/contacts.routes.js';
 
+
 // Initialisation de l'application Express
 const app = express();
 const PORT = 3000;
@@ -27,6 +28,7 @@ app.post('/project', authenticationMiddleware, (req, res) => {
 });
 // Routes pour les contacts
 app.use('/companies', contactsRouter);
+
 
 // Démarrage du serveur
 app.listen(PORT, () => {

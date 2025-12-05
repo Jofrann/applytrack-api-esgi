@@ -13,7 +13,7 @@ CREATE TABLE companies (
   postal_code VARCHAR(20),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_id INT NOT NULL,
-
+3
   UNIQUE (name, user_id),
 
   FOREIGN KEY (user_id) REFERENCES users(id)
