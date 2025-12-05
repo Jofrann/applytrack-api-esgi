@@ -9,6 +9,16 @@ export async function createInteraction(req, res) {
 
   // Vérification et insertion dans la base de données
   try {
+
+    //Verifier que la date à laquelle l'interaction est créée n'est pas dans le futur et n'est pas la meme que celle d'une interaction déjà existante pour cette company
+    const interactionDate = new Date(date);
+    const currentDate = new Date();
+
+    // Si la date est dans le futur, renvoyer une erreur
+    if (interactionDate > currentDate) {
+      return res.status(400).send("Interaction date cannot be in the future");
+    }
+
     // Vérifier que la company appartient au user
     const [company] = await db.query(
       `SELECT id FROM companies WHERE id = ? AND user_id = ?`,

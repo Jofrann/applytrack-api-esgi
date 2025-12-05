@@ -3,6 +3,7 @@ import usersRouter from './routes/users.routes.js';
 import { authenticationMiddleware } from './middlewares/authentication.js';
 import companiesRouter from './routes/companies.routes.js';
 import contactsRouter from './routes/contacts.routes.js';
+import interactionsRouter from './routes/interactions.routes.js';
 
 
 // Initialisation de l'application Express
@@ -28,6 +29,9 @@ app.post('/project', authenticationMiddleware, (req, res) => {
 });
 // Routes pour les contacts
 app.use('/companies', contactsRouter);
+
+// Routes pour les interactions
+app.use('/companies', interactionsRouter);
 
 
 // Démarrage du serveur

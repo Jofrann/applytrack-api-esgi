@@ -1,9 +1,9 @@
 // controllers/contacts.controller.js
 import { db } from '../database/connection.js';
 
-//
+
 // 1) Add a contact to a company
-//
+
 export async function createContact(req, res) {
   const companyId = req.params.companyId;
   const { first_name, last_name, job_title, email, phone } = req.body;
